@@ -24635,7 +24635,7 @@ if(c===r-q)return q
 r=B.c.iF(a,b,r+1)}return null},
 aga(a,b){var s=0,r=A.S(t.a),q,p,o,n,m,l
 var $async$aga=A.T(function(c,d){if(c===1)return A.P(d,r)
-while(true)switch(s){case 0:o=A.eh("http://192.168.1.38:8890/auth/register")
+while(true)switch(s){case 0:o=A.eh("https://backend1-zxe5xu6lzq-et.a.run.app/auth/register")
 n=t.N
 m=A.at(["Content-Type","application/json"],n,n)
 s=3
@@ -24652,7 +24652,7 @@ throw A.e(J.agA(J.agA(o.h(p,"status"),"#"),o.h(p,"message")))}case 1:return A.Q(
 return A.R($async$aga,r)},
 afZ(a,b){var s=0,r=A.S(t.a),q,p,o,n,m
 var $async$afZ=A.T(function(c,d){if(c===1)return A.P(d,r)
-while(true)switch(s){case 0:p=A.eh("http://192.168.1.38:8890/auth/login")
+while(true)switch(s){case 0:p=A.eh("https://backend1-zxe5xu6lzq-et.a.run.app/auth/login")
 o=t.N
 n=A.at(["Content-Type","application/json"],o,o)
 s=3
@@ -78427,7 +78427,7 @@ ua(a){return this.Tj(a)},
 Tj(a){var s=0,r=A.S(t.XP),q,p
 var $async$ua=A.T(function(b,c){if(b===1)return A.P(c,r)
 while(true)switch(s){case 0:s=3
-return A.V(A.aDg(A.eh("http://192.168.1.38:3000/notes/"+a)),$async$ua)
+return A.V(A.aDg(A.eh("https://backend2-zxe5xu6lzq-et.a.run.app/notes/"+a)),$async$ua)
 case 3:p=c
 if(p.b===200){q=J.tg(B.aX.dL(A.Sh(A.S5(p.e).c.a.h(0,"charset")).dL(p.w)),new A.a13(),t.KA).ez(0)
 s=1
@@ -78437,7 +78437,7 @@ return A.R($async$ua,r)},
 wS(a,b,c){return this.acs(a,b,c)},
 acs(a,b,c){var s=0,r=A.S(t.KA),q,p,o,n,m
 var $async$wS=A.T(function(d,e){if(d===1)return A.P(e,r)
-while(true)switch(s){case 0:p=A.eh("http://192.168.1.38:3000/notes/add")
+while(true)switch(s){case 0:p=A.eh("https://backend2-zxe5xu6lzq-et.a.run.app/notes/add")
 o=t.N
 n=A.at(["Content-Type","application/json"],o,o)
 s=3
