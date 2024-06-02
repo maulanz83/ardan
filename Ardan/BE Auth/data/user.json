@@ -1,0 +1,34 @@
+[
+  {
+    "email": "t",
+    "password": "p",
+    "currency": "CNY",
+    "lightMode": "F",
+    "profileImage": "assets/image5.jpg"
+  },
+  {
+    "email": "pemrograman@mobile.com",
+    "password": "juadebewy",
+    "currency": "USD",
+    "lightMode": "F",
+    "profileImage": "assets/image2.jpg"
+  },
+  {
+    "email": "cekidr@cek.cek",
+    "password": "kms",
+    "currency": "IDR",
+    "lightMode": "F",
+    "profileImage": "assets/image2.jpg"
+  },
+  {
+    "email": "cekyuan@cek.cek",
+    "password": "lnt",
+    "currency": "CNY",
+    "lightMode": "F",
+    "profileImage": "assets/image4.jpg"
+  },
+  {
+    "email": "p",
+    "password": "k"
+  }
+]
