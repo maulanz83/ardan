@@ -17,6 +17,7 @@ class _NotePageState extends State<NotePage> {
   final _formKey = GlobalKey<FormState>();
   final _titleController = TextEditingController();
   final _contentController = TextEditingController();
+  Note? _editingNote;
 
   @override
   void initState() {
@@ -35,17 +36,30 @@ class _NotePageState extends State<NotePage> {
     }
   }
 
-  void createNote() async {
+  void createOrUpdateNote() async {
     if (_formKey.currentState!.validate()) {
       try {
-        final newNote = await noteService.createNote(
-          widget.email,
-          _titleController.text,
-          _contentController.text,
-        );
-        setState(() {
-          notes.add(newNote);
-        });
+        if (_editingNote == null) {
+          final newNote = await noteService.createNote(
+            widget.email,
+            _titleController.text,
+            _contentController.text,
+          );
+          setState(() {
+            notes.add(newNote);
+          });
+        } else {
+          final updatedNote = await noteService.updateNote(
+            _editingNote!.id,
+            _titleController.text,
+            _contentController.text,
+          );
+          setState(() {
+            final index = notes.indexWhere((note) => note.id == _editingNote!.id);
+            notes[index] = updatedNote;
+          });
+          _editingNote = null;
+        }
         _titleController.clear();
         _contentController.clear();
       } catch (e) {
@@ -53,6 +67,26 @@ class _NotePageState extends State<NotePage> {
         print(e.toString());
       }
     }
+  }
+
+  void deleteNote(int id) async {
+    try {
+      await noteService.deleteNote(id);
+      setState(() {
+        notes.removeWhere((note) => note.id == id);
+      });
+    } catch (e) {
+      // Handle error
+      print(e.toString());
+    }
+  }
+
+  void startEditing(Note note) {
+    setState(() {
+      _editingNote = note;
+      _titleController.text = note.title;
+      _contentController.text = note.content;
+    });
   }
 
   @override
@@ -90,22 +124,39 @@ class _NotePageState extends State<NotePage> {
                     },
                   ),
                   ElevatedButton(
-                    onPressed: createNote,
-                    child: Text('Create Note'),
+                    onPressed: createOrUpdateNote,
+                    child: Text(_editingNote == null ? 'Create Note' : 'Update Note'),
                   ),
                 ],
               ),
             ),
             Expanded(
-              child: ListView.builder(
-                itemCount: notes.length,
-                itemBuilder: (context, index) {
-                  final note = notes[index];
-                  return ListTile(
-                    title: Text(note.title),
-                    subtitle: Text(note.content),
-                  );
-                },
+              child: DataTable(
+                columns: [
+                  DataColumn(label: Text('Title')),
+                  DataColumn(label: Text('Content')),
+                  DataColumn(label: Text('Actions')),
+                ],
+                rows: notes.map((note) {
+                  return DataRow(cells: [
+                    DataCell(Text(note.title)),
+                    DataCell(Text(note.content)),
+                    DataCell(
+                      Row(
+                        children: [
+                          IconButton(
+                            icon: Icon(Icons.edit),
+                            onPressed: () => startEditing(note),
+                          ),
+                          IconButton(
+                            icon: Icon(Icons.delete),
+                            onPressed: () => deleteNote(note.id),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ]);
+                }).toList(),
               ),
             ),
           ],
